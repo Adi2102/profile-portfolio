@@ -3,7 +3,6 @@ import React, { useState } from "react";
 const Contact = ({ data }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
 
   if (data) {
@@ -19,11 +18,9 @@ const Contact = ({ data }) => {
 
   const submitForm = () => {
     window.open(
-      `mailto:${contactEmail}?subject=${encodeURIComponent(
-        subject
-      )}&body=${encodeURIComponent(name)} (${encodeURIComponent(
-        email
-      )}): ${encodeURIComponent(message)}`
+      `mailto:${contactEmail}&body=${encodeURIComponent(
+        name
+      )} (${encodeURIComponent(email)}): ${encodeURIComponent(message)}`
     );
   };
 
@@ -76,19 +73,6 @@ const Contact = ({ data }) => {
               </div>
 
               <div>
-                <label htmlFor="contactSubject">Subject</label>
-                <input
-                  type="text"
-                  defaultValue=""
-                  value={subject}
-                  size="35"
-                  id="contactSubject"
-                  name="contactSubject"
-                  onChange={(e) => setSubject(e.target.value)}
-                />
-              </div>
-
-              <div>
                 <label htmlFor="contactMessage">
                   Message <span className="required">*</span>
                 </label>
@@ -110,7 +94,7 @@ const Contact = ({ data }) => {
             </fieldset>
           </form>
 
-          <div id="message-warning"> Error boy</div>
+          <div id="message-warning"> Error </div>
           <div id="message-success">
             <i className="fa fa-check"></i>Your message was sent, thank you!
             <br />

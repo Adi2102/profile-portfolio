@@ -5,25 +5,38 @@ const Resume = ({ data }) => {
     var skillmessage = data.skillmessage;
     var education = data.education.map(function (education) {
       return (
-        <div key={education.school}>
-          <h3>{education.school}</h3>
+        <div key={education.college}>
+          <h3>{education.college}</h3>
           <p className="info">
             {education.degree} <span>&bull;</span>
             <em className="date">{education.graduated}</em>
+            <p>CGPA: {education.grades} </p>
           </p>
-          <p>{education.description}</p>
+          <p className="description">{education.description}</p>
         </div>
       );
     });
-    var work = data.work.map(function (work) {
+    var certificates = data.certificates.map(function (certificates) {
       return (
-        <div key={work.company}>
-          <h3>{work.company}</h3>
+        <div key={certificates.issuedBy}>
+          <h3>{certificates.issuedBy}</h3>
           <p className="info">
-            {work.title}
-            <span>&bull;</span> <em className="date">{work.years}</em>
+            {certificates.courseName}
+            <span>&bull;</span>
+            <em className="date">{certificates.duration}</em>
+            <p>Grade Achieved: {certificates.grades} </p>
+            <div className="link_style">
+              <a
+                // style="background: linear-gradient(to right, #bcbcbc 25%,#ffcd02 25%, #ffcd02 50%, #e84f47 50%, #e84f47 75%, #65c1ac 75%);"
+                href={certificates.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Verified certificate link
+              </a>
+            </div>
+            <br />
           </p>
-          <p>{work.description}</p>
         </div>
       );
     });
@@ -54,14 +67,13 @@ const Resume = ({ data }) => {
         </div>
       </div>
 
-      <div className="row work">
+      <div className="row certificates">
         <div className="three columns header-col">
           <h1>
-            <span>Work</span>
+            <span>Certificates</span>
           </h1>
         </div>
-
-        <div className="nine columns main-col">{work}</div>
+        <div className="nine columns main-col">{certificates}</div>
       </div>
 
       <div className="row skill">
@@ -74,7 +86,7 @@ const Resume = ({ data }) => {
         <div className="nine columns main-col">
           <p>{skillmessage}</p>
 
-          <div className="bars">
+          <div>
             <ul className="skills">{skills}</ul>
           </div>
         </div>
